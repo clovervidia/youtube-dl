@@ -150,7 +150,7 @@ class TumblrIE(InfoExtractor):
             r'(?s)<title>(?P<title>.*?)(?: \| Tumblr)?</title>',
             webpage, 'title')
 
-        upload_date = self._html_search_regex(r'datePublished":"([\d-]*)', webpage, 'date')
+        upload_date = self._html_search_regex(r'datePublished":"(?P<date>[\d-]*)', webpage, 'date')
         upload_date = unified_strdate(upload_date)
 
         return {
