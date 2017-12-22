@@ -13,6 +13,7 @@ from ..utils import (
     int_or_none,
     remove_end,
     try_get,
+    unified_strdate,
     xpath_text,
 )
 
@@ -399,9 +400,13 @@ class TwitterIE(InfoExtractor):
         # strip  'https -_t.co_BJYgOjSeGA' junk from filenames
         title = re.sub(r'\s+(https?://[^ ]+)', '', title)
 
+        upload_date = self._html_search_regex(r'(?s)<span>.* (?P<date>\d+ \w+ \d+).*<\/span>', webpage, 'date')
+        upload_date = unified_strdate(upload_date)
+
         info = {
             'uploader_id': user_id,
             'uploader': username,
+            'upload_date': upload_date,
             'webpage_url': url,
             'description': '%s on Twitter: "%s"' % (username, description),
             'title': username + ' - ' + title,
