@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import re
 
 from .common import InfoExtractor
-from ..utils import int_or_none
+from ..utils import int_or_none, unified_strdate
 
 
 class TumblrIE(InfoExtractor):
@@ -150,6 +150,9 @@ class TumblrIE(InfoExtractor):
             r'(?s)<title>(?P<title>.*?)(?: \| Tumblr)?</title>',
             webpage, 'title')
 
+        upload_date = self._html_search_regex(r'datePublished":"([\d-]*)', webpage, 'date')
+        upload_date = unified_strdate(upload_date)
+
         return {
             'id': video_id,
             'title': video_title,
@@ -157,4 +160,6 @@ class TumblrIE(InfoExtractor):
             'thumbnail': self._og_search_thumbnail(webpage, default=None),
             'duration': duration,
             'formats': formats,
+            'upload_date': upload_date,
+            'uploader': blog,
         }
