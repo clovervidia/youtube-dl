@@ -45,6 +45,7 @@ class TwitterBaseIE(InfoExtractor):
 class TwitterCardIE(TwitterBaseIE):
     IE_NAME = 'twitter:card'
     _VALID_URL = r'https?://(?:www\.)?twitter\.com/i/(?P<path>cards/tfw/v1|videos(?:/tweet)?)/(?P<id>\d+)'
+    # TODO: Add upload_date to tests
     _TESTS = [
         {
             'url': 'https://twitter.com/i/cards/tfw/v1/560070183650213889',
@@ -400,7 +401,9 @@ class TwitterIE(InfoExtractor):
         # strip  'https -_t.co_BJYgOjSeGA' junk from filenames
         title = re.sub(r'\s+(https?://[^ ]+)', '', title)
 
-        upload_date = self._html_search_regex(r'(?s)<span>.* (?P<date>\d+ \w+ \d+).*<\/span>', webpage, 'date')
+        upload_date = self._html_search_regex(r'(?s)<span>.* (?P<date>\d+ \w+ \d+).*<\/span>', webpage, 'date', default=None)
+        if not upload_date:
+            upload_date = self._html_search_regex(r'(?s)(?P<date>\d+ \w+ \d+)', webpage, 'date', default=None)
         upload_date = unified_strdate(upload_date)
 
         info = {
