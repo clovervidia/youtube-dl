@@ -9,6 +9,7 @@ from ..utils import int_or_none, unified_strdate
 
 class TumblrIE(InfoExtractor):
     _VALID_URL = r'https?://(?P<blog_name>[^/?#&]+)\.tumblr\.com/(?:post|video)/(?P<id>[0-9]+)(?:$|[/?#])'
+    # TODO: Add upload_date and uploader to tests
     _TESTS = [{
         'url': 'http://tatianamaslanydaily.tumblr.com/post/54196191430/orphan-black-dvd-extra-behind-the-scenes',
         'md5': '479bb068e5b16462f5176a6828829767',
@@ -17,7 +18,9 @@ class TumblrIE(InfoExtractor):
             'ext': 'mp4',
             'title': 'tatiana maslany news, Orphan Black || DVD extra - behind the scenes ↳...',
             'description': 'md5:37db8211e40b50c7c44e95da14f630b7',
-            'thumbnail': r're:http://.*\.jpg',
+            'thumbnail': r're:^https?://.*\.jpg',
+            'upload_date': '20130629',
+            'uploader': 'tatianamaslanydaily',
         }
     }, {
         'url': 'http://5sostrum.tumblr.com/post/90208453769/yall-forgetting-the-greatest-keek-of-them-all',
@@ -27,7 +30,8 @@ class TumblrIE(InfoExtractor):
             'ext': 'mp4',
             'title': '5SOS STRUM ;]',
             'description': 'md5:dba62ac8639482759c8eb10ce474586a',
-            'thumbnail': r're:http://.*\.jpg',
+            'thumbnail': r're:^https?://.*\.jpg',
+            'upload_date': None,
         }
     }, {
         'url': 'http://hdvideotest.tumblr.com/post/130323439814/test-description-for-my-hd-video',
@@ -37,7 +41,9 @@ class TumblrIE(InfoExtractor):
             'ext': 'mp4',
             'title': 'HD Video Testing \u2014 Test description for my HD video',
             'description': 'md5:97cc3ab5fcd27ee4af6356701541319c',
-            'thumbnail': r're:http://.*\.jpg',
+            'thumbnail': r're:^https?://.*\.jpg',
+            'upload_date': '20151002',
+            'uploader': 'hdvideotest'
         },
         'params': {
             'format': 'hd',
@@ -65,6 +71,7 @@ class TumblrIE(InfoExtractor):
             'title': 'Cam Damage-HD 720p',
             'uploader': 'John Moyer',
             'uploader_id': 'user32021558',
+            'upload_date': None,
         },
         'add_ie': ['Vimeo'],
     }, {
@@ -81,6 +88,7 @@ class TumblrIE(InfoExtractor):
             'like_count': int,
             'comment_count': int,
             'repost_count': int,
+            'timestamp': 1455940159,
         },
         'add_ie': ['Vine'],
     }, {
@@ -92,7 +100,10 @@ class TumblrIE(InfoExtractor):
             'title': 'Video by victoriassecret',
             'description': 'Invisibility or flight…which superpower would YOU choose? #VSFashionShow #ThisOrThat',
             'uploader_id': 'victoriassecret',
-            'thumbnail': r're:^https?://.*\.jpg'
+            'thumbnail': r're:^https?://.*\.jpg',
+            'upload_date': '20151205', # based off date of the embedded video rather than the post
+            'uploader': 'Victoria\'s Secret',
+            'timestamp': 1449349808,
         },
         'add_ie': ['Instagram'],
     }]
