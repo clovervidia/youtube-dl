@@ -45,7 +45,6 @@ class TwitterBaseIE(InfoExtractor):
 class TwitterCardIE(TwitterBaseIE):
     IE_NAME = 'twitter:card'
     _VALID_URL = r'https?://(?:www\.)?twitter\.com/i/(?P<path>cards/tfw/v1|videos(?:/tweet)?)/(?P<id>\d+)'
-    # TODO: Add upload_date to tests
     _TESTS = [
         {
             'url': 'https://twitter.com/i/cards/tfw/v1/560070183650213889',
@@ -56,6 +55,7 @@ class TwitterCardIE(TwitterBaseIE):
                 'title': 'Twitter web player',
                 'thumbnail': r're:^https?://.*\.jpg$',
                 'duration': 30.033,
+                'upload_date': None,
             },
         },
         {
@@ -66,6 +66,7 @@ class TwitterCardIE(TwitterBaseIE):
                 'ext': 'mp4',
                 'title': 'Twitter web player',
                 'thumbnail': r're:^https?://.*(?:\bformat=|\.)jpg',
+                'upload_date': None,  # TODO: The date isn't included in card pages, but the Tweet ID is present. Perhaps I can get it from there if necessary.
             },
         },
         {
@@ -260,6 +261,7 @@ class TwitterIE(InfoExtractor):
             'uploader': 'FREE THE NIPPLE',
             'uploader_id': 'freethenipple',
             'duration': 12.922,
+            'upload_date': '20150913',
         },
     }, {
         'url': 'https://twitter.com/giphz/status/657991469417025536/photo/1',
@@ -284,6 +286,7 @@ class TwitterIE(InfoExtractor):
             'description': 'Star Wars on Twitter: "A new beginning is coming December 18. Watch the official 60 second #TV spot for #StarWars: #TheForceAwakens."',
             'uploader_id': 'starwars',
             'uploader': 'Star Wars',
+            'upload_date': '20151113',
         },
     }, {
         'url': 'https://twitter.com/BTNBrentYarina/status/705235433198714880',
@@ -294,6 +297,7 @@ class TwitterIE(InfoExtractor):
             'description': 'Brent Yarina on Twitter: "Khalil Iverson\'s missed highlight dunk. And made highlight dunk. In one highlight."',
             'uploader_id': 'BTNBrentYarina',
             'uploader': 'Brent Yarina',
+            'upload_date': '20160302',
         },
         'params': {
             # The same video as https://twitter.com/i/videos/tweet/705235433198714880
@@ -311,6 +315,7 @@ class TwitterIE(InfoExtractor):
             'uploader': 'JG',
             'uploader_id': 'jaydingeer',
             'duration': 30.0,
+            'upload_date': '20160223',
         },
     }, {
         'url': 'https://twitter.com/Filmdrunk/status/713801302971588609',
@@ -323,7 +328,7 @@ class TwitterIE(InfoExtractor):
             'uploader': 'Vince Mancini',
             'uploader_id': 'Filmdrunk',
             'timestamp': 1402826626,
-            'upload_date': '20140615',
+            'upload_date': '20160326',
         },
         'add_ie': ['Vine'],
     }, {
@@ -336,6 +341,7 @@ class TwitterIE(InfoExtractor):
             'uploader_id': 'captainamerica',
             'uploader': 'Captain America',
             'duration': 3.17,
+            'upload_date': '20160412',
         },
     }, {
         'url': 'https://twitter.com/OPP_HSD/status/779210622571536384',
@@ -361,6 +367,7 @@ class TwitterIE(InfoExtractor):
             'uploader': 'عالم الأخبار',
             'uploader_id': 'news_al3alm',
             'duration': 277.4,
+            'upload_date': '20170412',
         },
     }, {
         'url': 'https://twitter.com/i/web/status/910031516746514432',
@@ -373,6 +380,7 @@ class TwitterIE(InfoExtractor):
             'uploader': 'Préfet de Guadeloupe',
             'uploader_id': 'Prefet971',
             'duration': 47.48,
+            'upload_date': '20170919',
         },
         'params': {
             'skip_download': True,  # requires ffmpeg
