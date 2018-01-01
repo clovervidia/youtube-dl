@@ -76,7 +76,7 @@ class TumblrIE(InfoExtractor):
         'add_ie': ['Vimeo'],
     }, {
         'url': 'http://sutiblr.tumblr.com/post/139638707273',
-        'md5': '2dd184b3669e049ba40563a7d423f95c',
+        'md5': '2dd184b3669e049ba40563a7d423f95c',  # This hash doesn't match the downloaded video
         'info_dict': {
             'id': 'ir7qBEIKqvq',
             'ext': 'mp4',
@@ -101,7 +101,7 @@ class TumblrIE(InfoExtractor):
             'description': 'Invisibility or flight…which superpower would YOU choose? #VSFashionShow #ThisOrThat',
             'uploader_id': 'victoriassecret',
             'thumbnail': r're:^https?://.*\.jpg',
-            'upload_date': '20151205', # based off date of the embedded video rather than the post
+            'upload_date': '20151205',  # Based off date of the embedded video rather than the post
             'uploader': 'Victoria\'s Secret',
             'timestamp': 1449349808,
         },
